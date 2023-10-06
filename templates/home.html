@@ -9,14 +9,26 @@
 <div>
   <span><a href="/{{ pet.id }}">{{ pet.name }}</a></span>
   {% if pet.available %}
-    <span><b>is available!</b></span>
+  <span><b>is available!</b></span>
   {% endif %}
-  <!--TODO: Only show image if image exists-->
+
+  {% if pet.photo_url %}
   <div><img src="{{ pet.photo_url }}"></div>
+  {% endif %}
+
+
 </div>
 
 {% endfor %}
 
 <a href="/add">Add Pet!</a>
+
+<h2>Random Petfinder Pet</h2>
+
+{{ petfinder_pet.name }}
+{{ petfinder_pet.age }}
+{% if petfinder_pet.photo_url %}
+<div><img src="{{ petfinder_pet.photo_url }}"></div>
+{% endif %}
 
 {% endblock %}
