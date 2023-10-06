@@ -21,9 +21,10 @@ def parse_animal_display_info(animal):
 
     parsed_animal = {
         "name": animal["name"],
-        "age": animal["age"],
-        "photo_url": animal["photos"][0]["small"] or ""
+        "age": animal["age"]
     }
+
+    parsed_animal["photo_url"] = animal["photos"][0]["small"] if animal["photos"] else ""
 
     return parsed_animal
 
