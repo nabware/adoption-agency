@@ -6,11 +6,13 @@
 <h1>Pets</h1>
 {% for pet in pets %}
 
-<img src="{{ pet.photo_url }}">
-<span>{{ pet.name }}</span>
-{% if pet.available %}
-<span><b>is available!</b></span>
-{% endif %}
+<div>
+  <span><a href="/{{ pet.id }}">{{ pet.name }}</a></span>
+  {% if pet.available %}
+    <span><b>is available!</b></span>
+  {% endif %}
+  <img src="{{ pet.photo_url }}">
+</div>
 
 {% endfor %}
 
