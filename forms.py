@@ -7,6 +7,7 @@ class AddPetForm(FlaskForm):
     """Form for adding pets"""
 
     name = StringField("Pet name", validators=[InputRequired()])
+
     species = SelectField(
         "Pet Species",
         choices=[
@@ -16,7 +17,9 @@ class AddPetForm(FlaskForm):
         ],
         validators=[InputRequired()],
     )
+
     photo_url = StringField("Pet photo", validators=[Optional(), URL()])
+
     age = SelectField(
         "Pet Age",
         choices=[
@@ -27,12 +30,16 @@ class AddPetForm(FlaskForm):
         ],
         validators=[InputRequired()],
     )
+
     notes = TextAreaField("Notes", validators=[Optional()])
+#TODO: not in this form, oopsies
     available = BooleanField("Available", validators=[Optional()])
 
 class EditPetForm(FlaskForm):
     """Form for editing pets"""
 
     photo_url = StringField("Pet photo", validators=[Optional(), URL()])
+
     notes = TextAreaField("Notes", validators=[Optional()])
-    available = BooleanField("Available", validators=[Optional()])
+
+    available = BooleanField("Available")

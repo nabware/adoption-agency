@@ -11,7 +11,8 @@
   {% if pet.available %}
     <span><b>is available!</b></span>
   {% endif %}
-  <img src="{{ pet.photo_url }}">
+  <!--TODO: Only show image if image exists-->
+  <div><img src="{{ pet.photo_url }}"></div>
 </div>
 
 {% endfor %}

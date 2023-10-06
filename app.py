@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, redirect, request, flash
 from forms import AddPetForm, EditPetForm
 from models import db, connect_db, Pet
+from petfinder import update_auth_token_string, get_random_animal
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -13,13 +14,16 @@ app.config["SQLALCHEMY_ECHO"] = True
 
 connect_db(app)
 
-app.config["SECRET_KEY"] = "SECRET!"
+
+app.config["SECRET_KEY"] = 'shhhhhhhhh'
+
 debug = DebugToolbarExtension(app)
 
 
 @app.get("/")
 def home():
-    """Return home page."""
+    #TODO: rename more descriptively and do docstring better
+    """Returns home page."""
 
     pets = Pet.query.all()
 
@@ -28,7 +32,7 @@ def home():
 
 @app.route("/add", methods=["GET", "POST"])
 def add_pet():
-    """Add pet"""
+    """Displays add pet form; handle adding"""
 
     form = AddPetForm()
 
@@ -38,7 +42,7 @@ def add_pet():
         photo_url = form.photo_url.data
         age = form.age.data
         notes = form.notes.data
-        available = form.available.data
+        available = form.available.data #TODO: remove
 
         pet = Pet(
             name=name,
@@ -51,15 +55,15 @@ def add_pet():
         db.session.add(pet)
         db.session.commit()
 
-        flash("Pet succesfully added!")
+        flash("Pet successfully added!")
 
         return redirect("/")
 
     return render_template("add_pet.html", form=form)
 
 @app.route("/<int:pet_id>", methods=["GET", "POST"])
-def edit_pet(pet_id):
-    """Edit pet"""
+def display_and_edit_pet(pet_id):
+    """Displays pet info and editable information of that pet"""
 
     pet = Pet.query.get_or_404(pet_id)
 
@@ -76,7 +80,7 @@ def edit_pet(pet_id):
 
         db.session.commit()
 
-        flash("Pet succesfully update!")
+        flash("Pet successfully updated!")
 
         return redirect("/")
 
